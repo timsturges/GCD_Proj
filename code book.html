@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>CODE BOOK for Getting And Cleaning Data Course Project</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>CODE BOOK for Getting And Cleaning Data Course Project</h1>
+
+<h1></h1>
+
+<p>This is a code book which identifies all the various objects uses in the <strong>run_analysis.R</strong> script for this project.  </p>
+
+<p>fileUrl = URL of data used by this script<br/>
+sbj_train = contents of &ldquo;./UCI HAR Dataset/train/subject_train.txt&rdquo; - SUBJECT ID INDEX #s of train data set<br/>
+sbj_test = contentds of &ldquo;./UCI HAR Dataset/test/subject_test.txt&rdquo; - SUBJECT ID INDEX #s of test data set<br/>
+sbj = merged data by rbind of sbj_train and sbj_test<br/>
+y_train = contents of &ldquo;./UCI HAR Dataset/train/y_train.txt&rdquo; - ACTIVITY ID INDEX #s of train data set<br/>
+y_test = contents of &ldquo;./UCI HAR Dataset/test/y_test.txt&rdquo; - ACTIVITY ID INDEX #s of test data set<br/>
+y = merged data by rbind of y_train and y_test<br/>
+x_train = contents of &ldquo;./UCI HAR Dataset/train/X_train.txt&rdquo;- raw data readings of train data set<br/>
+x_test = contents of &ldquo;./UCI HAR Dataset/test/X_test.txt&rdquo; - raw data readings of test data set<br/>
+x = merged data by rbind of x_train and x_test<br/>
+act_lab = contents of &ldquo;./UCI HAR Dataset/activity_labels.txt&rdquo; - Activity label names<br/>
+feat = contents of &ldquo;./UCI HAR Dataset/features_info.txt&rdquo; - measurement variable names <strong>SEE BELOW</strong><br/>
+df_raw = data frame created by cbind of sbj, y, and x<br/>
+df_clean = data frame created by extracting only the desired measurements from df_raw; labeled and processed for readability<br/>
+SUBJECT = column of subject ID #s pulled from sbj_train, sbj_test in df_clean, df_raw, <em>CLEAN DATA.txt</em><br/>
+ACTIVITY = column name of activity names extracted from act_lab in df_clean, df_raw, <em>CLEAN DATA.txt</em><br/>
+xcolindx = character vector used for reading / writing column names for variables used<br/>
+CLEAN DATA.txt = result of writting df_clean to file  </p>
+
+<h2>A note regarding variable names for df_clean, df_raw, and <em>CLEAN DATA.txt</em></h2>
+
+<p>df_raw, df_clean, and &ldquo;CLEAN DATA.txt&rdquo; uses variable names programatically extracted from the study data.  </p>
+
+<p>A full list and desciprtion of these variables has been created by the study authors in the ./UCI HAR Dataset/train/README.txt file, which is not to be confused with the README.md/html files which are part of this project / repo.  </p>
+
+<p>I cannot say that I was able to totally comprehend the variable desciptions, and as such it would be at best redundant, and at worst an exercise in incompetence to attempt to describe these variables any differently that the study&#39;s authors already have. Thus, any and all available information regarding these variable desciptions can be found in the study&#39;s documentation (./UCI HAR Dataset/). That said, as the project requires calculation of the mean of some of these variables, &ldquo;Mean Of &rdquo; has been affixed to the head of the variable names in df_clean and <em>CLEAN DATA.txt</em> to indicate that that variable&#39;s mean was calculated on the basis of each SUBJECT and ACTIVITY.</p>
+
+</body>
+
+</html>
+
